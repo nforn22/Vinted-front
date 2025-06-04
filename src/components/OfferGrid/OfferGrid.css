@@ -1,0 +1,56 @@
+.offer-grid {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin: 40px 0;
+}
+
+.offer-card {
+  width: 250px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 12px;
+}
+
+.offer-owner {
+  padding: 12px 0 0 8px;
+  font-size: 15px;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.offer-image {
+  width: 100%;
+  height: 320px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.offer-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0 0 8px;
+}
+.offer-price {
+  font-weight: bold;
+}
+.offer-size, .offer-brand {
+  font-size: 14px;
+  color: #888;
+} 

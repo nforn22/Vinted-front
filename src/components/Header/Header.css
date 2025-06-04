@@ -1,0 +1,42 @@
+header {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 0 32px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2cb1ba;
+  letter-spacing: 1px;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 16px;
+}
+
+.buttons-container button {
+  background: #fff;
+  border: 1px solid #2cb1ba;
+  color: #2cb1ba;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.buttons-container button:hover {
+  background: #2cb1ba;
+  color: #fff;
+} 
