@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
-import OfferGrid from './components/OfferGrid/OfferGrid';
+import Home from './pages/Home';
 import './App.css';
 
 function App() {
@@ -8,12 +8,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={
-          <>
-            <div className="hero" style={{ backgroundColor: '#f5f5f5', height: '400px' }}></div>
-            <OfferGrid />
-          </>
-        } />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );
