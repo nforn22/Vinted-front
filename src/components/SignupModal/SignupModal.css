@@ -257,19 +257,32 @@
 }
 
 /* ===== Section de changement (connexion) ===== */
-.signup-switch {
-  padding: 24px 40px 32px 40px;
+.signup-or-email {
+  padding: 20px 40px 0 40px;
   text-align: center;
   font-size: 14px;
   color: #666;
   border-top: 1px solid #f0f0f0;
   background-color: #fafafa;
   border-radius: 0 0 16px 16px;
+  margin-bottom: 0;
+}
+
+.signup-switch {
+  padding: 8px 40px 24px 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  background-color: #fafafa;
+  border-radius: 0 0 16px 16px;
+  border-top: none;
+  margin-top: 0;
 }
 
 .signup-switch-link {
   color: #09b3af;
   font-weight: 600;
+  cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease;
   border-radius: 4px;
@@ -356,4 +369,67 @@
 }
 .toggle-eye:hover {
   color: #09b3af;
+}
+
+/* ===== Boutons sociaux ===== */
+.social-buttons {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 48px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333;
+}
+
+.social-btn:hover {
+  border-color: #09b3af;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon {
+  font-size: 20px;
+}
+
+.facebook-icon {
+  color: #1877f2;
+}
+
+/* ===== Section "Ou inscris-toi avec" ===== */
+.signup-email-link {
+  color: #09b3af;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.signup-email-link:hover {
+  color: #078a87;
+  background-color: rgba(9, 179, 175, 0.1);
+  text-decoration: underline;
+}
+
+.login-bottom-bar {
+  background-color: #fafafa;
+  border-radius: 0 0 16px 16px;
+  padding: 20px 40px 24px 40px;
+  text-align: center;
+  margin-top: 0;
 }

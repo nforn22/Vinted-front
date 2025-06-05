@@ -105,4 +105,50 @@ header {
 .btn-primary:hover {
   background: #259ba3;
   border-color: #259ba3;
+}
+
+/* ===== Bouton S'inscrire avec séparation ===== */
+.signup-combined-btn {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #09b3af;
+  border-radius: 8px;
+  height: 48px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  color: #09b3af;
+}
+
+.signup-combined-btn:hover {
+  background-color: #f8fdfd;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(9, 179, 175, 0.2);
+}
+
+.signup-part {
+  flex: 1;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.login-part {
+  flex: 1;
+  padding: 0 20px;
+  text-align: center;
+  position: relative;
+}
+
+.login-part::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background-color: #09b3af;
 } 

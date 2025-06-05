@@ -194,9 +194,8 @@ function SignupModal({ onClose }) {
                 {loading ? 'Connexion...' : 'Continuer'}
               </button>
             </form>
-            <div className="login-links">
-              <span className="login-link">Mot de passe oublié ?</span><br />
-              <span className="login-link">Un problème ?</span>
+            <div className="login-bottom-bar">
+              <span className="signup-switch-link" tabIndex={0} role="button">Mot de passe oublié ?</span>
             </div>
           </>
         )}

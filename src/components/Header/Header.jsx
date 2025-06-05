@@ -27,8 +27,10 @@ function Header() {
         </div>
 
         <div className="buttons-container">
-          <button className="btn-outline" onClick={() => setIsSignupOpen(true)}>S'inscrire</button>
-          <button className="btn-outline">Se connecter</button>
+          <button className="signup-combined-btn" onClick={() => setIsSignupOpen(true)}>
+            <span className="signup-part">S'inscrire</span>
+            <span className="login-part">Se connecter</span>
+          </button>
           <button className="btn-primary">Vends tes articles</button>
         </div>
       </div>
