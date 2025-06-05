@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
 import './SignupModal.css';
 
@@ -13,6 +14,8 @@ function SignupModal({ onClose }) {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // fermer avec Escape (échap)
   useEffect(() => {
@@ -77,7 +80,7 @@ function SignupModal({ onClose }) {
         <button className="modal-close" aria-label="Fermer" onClick={onClose}>
           &times;
         </button>
-        <h2 className="modal-title">S'inscrire</h2>
+        <h2 className="modal-title">Créer un compte</h2>
         <form className="signup-form" onSubmit={handleSubmit} autoComplete="off">
           <input
             type="text"
@@ -99,24 +102,34 @@ function SignupModal({ onClose }) {
           />
           {errors.email && <div className="error-message">{errors.email}</div>}
 
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-            className={errors.password ? 'input-error' : ''}
-            aria-label="Mot de passe"
-          />
+          <div className="password-container">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Mot de passe"
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+              className={errors.password ? 'input-error' : ''}
+              aria-label="Mot de passe"
+            />
+            <span className="toggle-eye" onClick={() => setShowPassword((prev) => !prev)} tabIndex={0} role="button" aria-label="Afficher ou masquer le mot de passe">
+              {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+            </span>
+          </div>
           {errors.password && <div className="error-message">{errors.password}</div>}
 
-          <input
-            type="password"
-            placeholder="Vérifier mot de passe"
-            value={confirmPassword}
-            onChange={event => setConfirmPassword(event.target.value)}
-            className={errors.confirmPassword ? 'input-error' : ''}
-            aria-label="Vérifier mot de passe"
-          />
+          <div className="password-container">
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              placeholder="Vérifier mot de passe"
+              value={confirmPassword}
+              onChange={event => setConfirmPassword(event.target.value)}
+              className={errors.confirmPassword ? 'input-error' : ''}
+              aria-label="Vérifier mot de passe"
+            />
+            <span className="toggle-eye" onClick={() => setShowConfirmPassword((prev) => !prev)} tabIndex={0} role="button" aria-label="Afficher ou masquer le mot de passe">
+              {showConfirmPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+            </span>
+          </div>
           {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
 
           <label className="newsletter-label">
