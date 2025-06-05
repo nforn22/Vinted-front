@@ -1,0 +1,214 @@
+.offer-page {
+  background: #f5f6f7;
+  min-height: calc(100vh - 72px);
+  padding: 40px 0;
+}
+
+.offer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 40px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Section Image ===== */
+.offer-image-section {
+  flex: 1;
+  max-width: 500px;
+}
+
+.offer-image-section img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Section Informations ===== */
+.offer-info-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ===== Prix ===== */
+.offer-price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ===== Détails produit ===== */
+.offer-details {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #6c757d;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.detail-value {
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ===== Informations produit ===== */
+.product-info {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 20px;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 15px 0;
+}
+
+.product-description {
+  color: #6c757d;
+  line-height: 1.5;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ===== Informations vendeur ===== */
+.owner-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.owner-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.owner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2cb1ba;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.owner-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+/* ===== Bouton Acheter ===== */
+.buy-button {
+  background: #2cb1ba;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: auto;
+}
+
+.buy-button:hover {
+  background: #259ba3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(44, 177, 186, 0.3);
+}
+
+/* ===== Loading et Error ===== */
+.loading,
+.error {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.loading p,
+.error p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .offer-container {
+    flex-direction: column;
+    margin: 0 10px;
+  }
+  
+  .offer-image-section {
+    max-width: none;
+  }
+  
+  .offer-image-section img {
+    height: 400px;
+  }
+  
+  .offer-info-section {
+    padding: 30px 20px;
+    gap: 20px;
+  }
+  
+  .offer-price {
+    font-size: 1.8rem;
+  }
+  
+  .product-name {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .offer-page {
+    padding: 20px 0;
+  }
+  
+  .offer-container {
+    margin: 0 5px;
+  }
+  
+  .offer-info-section {
+    padding: 20px 15px;
+  }
+}

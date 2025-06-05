@@ -48,9 +48,42 @@
   padding: 8px 0 0 8px;
 }
 .offer-price {
+  font-size: 18px;
   font-weight: bold;
+  color: #2cb1ba;
+  font-family: inherit;
+  text-decoration: none;
 }
 .offer-size, .offer-brand {
   font-size: 14px;
   color: #888;
+}
+
+.offer-link-reset {
+  text-decoration: none;
+  color: inherit;
+}
+
+.owner-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.avatar-placeholder {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #2cb1ba;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 15px;
+  margin-right: 8px;
+  vertical-align: middle;
 } 
