@@ -8,7 +8,8 @@ import './SignupModal.css';
 const API_URL = import.meta.env.VITE_API_URL || "https://site--backend-vinted--t29qzrn4njwx.code.run";
 
 function SignupModal({ onClose }) {
-  const [step, setStep] = useState('start'); // 'start' ou 'email'
+  // step: 'start' (inscription choix), 'email' (formulaire), 'login' (connexion choix), 'loginForm' (formulaire de connexion)
+  const [step, setStep] = useState('start');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +20,11 @@ function SignupModal({ onClose }) {
   const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // login form
+  const [loginEmailOrUsername, setLoginEmailOrUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [loginError, setLoginError] = useState('');
 
   // fermer avec Escape (échap)
   useEffect(() => {
@@ -38,7 +44,7 @@ function SignupModal({ onClose }) {
     }
   }
 
-  // gestion du submit
+  // gestion du submit inscription
   async function handleSubmit(event) {
     event.preventDefault();
     let newErrors = {};
@@ -77,6 +83,39 @@ function SignupModal({ onClose }) {
     }
   }
 
+  // gestion du submit login
+  async function handleLogin(event) {
+    event.preventDefault();
+    setLoginError('');
+    if (!loginEmailOrUsername || !loginPassword) {
+      setLoginError('Veuillez remplir tous les champs');
+      return;
+    }
+    setLoading(true);
+    try {
+      // On tente d'abord avec l'email
+      try {
+        await axios.post(`${API_URL}/user/login`, {
+          email: loginEmailOrUsername,
+          password: loginPassword,
+        });
+      } catch {
+        // Si erreur, on tente avec username
+        await axios.post(`${API_URL}/user/login`, {
+          email: '',
+          username: loginEmailOrUsername,
+          password: loginPassword,
+        });
+      }
+      setLoading(false);
+      // TODO: gérer la connexion (stockage token, etc.)
+      onClose();
+    } catch (error) {
+      setLoading(false);
+      setLoginError(error.response?.data?.message || "Erreur lors de la connexion");
+    }
+  }
+
   return (
     <div className="modal-overlay" onClick={handleOverlayClick} tabIndex={-1}>
       <div className="modal signup-modal" role="dialog" aria-modal="true">
@@ -101,7 +140,63 @@ function SignupModal({ onClose }) {
               Ou inscris-toi avec <span className="signup-email-link" onClick={() => setStep('email')}>ton adresse e-mail</span>
             </div>
             <div className="signup-switch">
-              Tu as déjà un compte ? <span className="signup-switch-link">Se connecter</span>
+              Tu as déjà un compte ? <span className="signup-switch-link" onClick={() => setStep('login')}>Se connecter</span>
+            </div>
+          </>
+        )}
+        {step === 'login' && (
+          <>
+            <h2 className="modal-title">Bienvenue !</h2>
+            <div className="social-buttons">
+              <button className="social-btn apple" type="button">
+                <FaApple className="social-icon" /> Continuer avec Apple
+              </button>
+              <button className="social-btn google" type="button">
+                <FcGoogle className="social-icon" /> Continuer avec Google
+              </button>
+              <button className="social-btn facebook" type="button">
+                <FaFacebookF className="social-icon facebook-icon" /> Continuer avec Facebook
+              </button>
+            </div>
+            <div className="signup-or-email">
+              Ou connecte-toi avec ton <span className="signup-email-link" onClick={() => setStep('loginForm')}>e-mail</span>
+            </div>
+            <div className="signup-switch">
+              Tu n'as pas de compte Vinted ? <span className="signup-switch-link" onClick={() => setStep('start')}>S'inscrire</span>
+            </div>
+          </>
+        )}
+        {step === 'loginForm' && (
+          <>
+            <h2 className="modal-title">Se connecter</h2>
+            <form className="signup-form" onSubmit={handleLogin} autoComplete="off">
+              <input
+                type="text"
+                placeholder="E-mail ou nom d'utilisateur"
+                value={loginEmailOrUsername}
+                onChange={event => setLoginEmailOrUsername(event.target.value)}
+                aria-label="E-mail ou nom d'utilisateur"
+              />
+              <div className="password-container">
+                <input
+                  type={showLoginPassword ? 'text' : 'password'}
+                  placeholder="Mot de passe"
+                  value={loginPassword}
+                  onChange={event => setLoginPassword(event.target.value)}
+                  aria-label="Mot de passe"
+                />
+                <span className="toggle-eye" onClick={() => setShowLoginPassword((prev) => !prev)} tabIndex={0} role="button" aria-label="Afficher ou masquer le mot de passe">
+                  {showLoginPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </span>
+              </div>
+              {loginError && <div className="error-message api-error">{loginError}</div>}
+              <button type="submit" className="signup-btn" disabled={loading}>
+                {loading ? 'Connexion...' : 'Continuer'}
+              </button>
+            </form>
+            <div className="login-links">
+              <span className="login-link">Mot de passe oublié ?</span><br />
+              <span className="login-link">Un problème ?</span>
             </div>
           </>
         )}
