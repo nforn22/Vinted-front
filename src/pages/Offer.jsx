@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+export const API_URL = "https://site--backend-vinted--t29qzrn4njwx.code.run";
+
+
 function Offer() {
   const [offer, setOffer] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -10,7 +13,7 @@ function Offer() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://lereacteur-vinted-api.herokuapp.com/offer/${id}`);
+        const response = await axios.get(`${API_URL}/offer/${id}`);
         setOffer(response.data);
         setIsLoading(false);
       } catch (error) {

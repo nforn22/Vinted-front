@@ -2,6 +2,7 @@ header {
   background: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   padding: 0 32px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .header-container {
@@ -11,32 +12,97 @@ header {
   align-items: center;
   justify-content: space-between;
   height: 72px;
+  gap: 24px;
 }
 
 .logo {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2cb1ba;
-  letter-spacing: 1px;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 40px;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: #9ca3af;
+  z-index: 1;
+  font-size: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #f9fafb;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-input:focus {
+  border-color: #2cb1ba;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(44, 177, 186, 0.1);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
 }
 
 .buttons-container {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
-.buttons-container button {
+.btn-outline {
   background: #fff;
-  border: 1px solid #2cb1ba;
-  color: #2cb1ba;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 1rem;
+  border: 1px solid #259BA3;
+  color: #259BA3;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.2s;
 }
 
-.buttons-container button:hover {
+.btn-outline:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.btn-primary {
   background: #2cb1ba;
+  border: 1px solid #2cb1ba;
   color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: #259ba3;
+  border-color: #259ba3;
 } 
