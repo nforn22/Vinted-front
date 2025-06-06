@@ -4,10 +4,11 @@ import { FaApple, FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import './SignupModal.css';
+import Cookies from "js-cookie";
 
 const API_URL = import.meta.env.VITE_API_URL || "https://site--backend-vinted--t29qzrn4njwx.code.run";
 
-function SignupModal({ onClose }) {
+function SignupModal({ onClose, setUserToken }) {
   // step: 'start' (inscription choix), 'email' (formulaire), 'login' (connexion choix), 'loginForm' (formulaire de connexion)
   const [step, setStep] = useState('start');
   const [username, setUsername] = useState('');
@@ -57,7 +58,7 @@ function SignupModal({ onClose }) {
     setLoading(true);
     setErrors({});
     try {
-      await axios.post(`${API_URL}/user/signup`, {
+      const response = await axios.post(`${API_URL}/user/signup`, {
         username,
         email,
         password,
@@ -65,6 +66,11 @@ function SignupModal({ onClose }) {
       });
       setLoading(false);
       setSuccess(true);
+      // stocke le token si présent dans la rep
+      if (response.data.token) {
+        Cookies.set("token", response.data.token, { expires: 7 });
+        setUserToken(response.data.token);
+      }
       setUsername('');
       setEmail('');
       setPassword('');
@@ -93,22 +99,24 @@ function SignupModal({ onClose }) {
     }
     setLoading(true);
     try {
-      // On tente d'abord avec l'email
+      let response;
       try {
-        await axios.post(`${API_URL}/user/login`, {
+        response = await axios.post(`${API_URL}/user/login`, {
           email: loginEmailOrUsername,
           password: loginPassword,
         });
       } catch {
-        // Si erreur, on tente avec username
-        await axios.post(`${API_URL}/user/login`, {
+        response = await axios.post(`${API_URL}/user/login`, {
           email: '',
           username: loginEmailOrUsername,
           password: loginPassword,
         });
       }
       setLoading(false);
-      // TODO: gérer la connexion (stockage token, etc.)
+      if (response.data.token) {
+        Cookies.set("token", response.data.token, { expires: 7 });
+        setUserToken(response.data.token);
+      }
       onClose();
     } catch (error) {
       setLoading(false);

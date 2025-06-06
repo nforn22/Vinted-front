@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
@@ -6,9 +8,16 @@ import SignupModal from './components/SignupModal/SignupModal';
 import './App.css';
 
 function App() {
+  const [userToken, setUserToken] = useState(null);
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) setUserToken(token);
+  }, []);
+
   return (
     <Router>
-      <Header />
+      <Header userToken={userToken} setUserToken={setUserToken} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/offer/:id" element={<Offer />} />

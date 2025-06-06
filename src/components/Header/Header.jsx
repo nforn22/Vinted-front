@@ -4,9 +4,15 @@ import { IoSearchOutline } from 'react-icons/io5';
 import logo from '../../assets/logo-vinted.png';
 import './Header.css';
 import SignupModal from '../SignupModal/SignupModal';
+import Cookies from "js-cookie";
 
-function Header() {
+function Header({ userToken, setUserToken }) {
   const [isSignupOpen, setIsSignupOpen] = useState(false);
+
+  function handleLogout() {
+    Cookies.remove("token");
+    setUserToken(null);
+  }
 
   return (
     <header>
@@ -27,14 +33,22 @@ function Header() {
         </div>
 
         <div className="buttons-container">
-          <button className="signup-combined-btn" onClick={() => setIsSignupOpen(true)}>
-            <span className="signup-part">S'inscrire</span>
-            <span className="login-part">Se connecter</span>
-          </button>
+          {!userToken ? (
+            <button className="signup-combined-btn" onClick={() => setIsSignupOpen(true)}>
+              <span className="signup-part">S'inscrire</span>
+              <span className="login-part">Se connecter</span>
+            </button>
+          ) : (
+            <button className="btn-outline" onClick={handleLogout}>
+              Se déconnecter
+            </button>
+          )}
           <button className="btn-primary">Vends tes articles</button>
         </div>
       </div>
-      {isSignupOpen && <SignupModal onClose={() => setIsSignupOpen(false)} />}
+      {isSignupOpen && (
+        <SignupModal onClose={() => setIsSignupOpen(false)} setUserToken={setUserToken} />
+      )}
     </header>
   );
 }
