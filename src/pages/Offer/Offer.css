@@ -16,7 +16,6 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Section Image ===== */
 .offer-image-section {
   flex: 1;
   max-width: 500px;
@@ -29,7 +28,6 @@
   display: block;
 }
 
-/* ===== Section Informations ===== */
 .offer-info-section {
   flex: 1;
   padding: 40px;
@@ -38,14 +36,12 @@
   gap: 30px;
 }
 
-/* ===== Prix ===== */
 .offer-price {
   font-size: 2rem;
   font-weight: bold;
   color: #333;
 }
 
-/* ===== Détails produit ===== */
 .offer-details {
   border-bottom: 1px solid #e9ecef;
   padding-bottom: 20px;
@@ -75,7 +71,6 @@
   font-size: 14px;
 }
 
-/* ===== Informations produit ===== */
 .product-info {
   border-bottom: 1px solid #e9ecef;
   padding-bottom: 20px;
@@ -95,7 +90,6 @@
   margin: 0;
 }
 
-/* ===== Informations vendeur ===== */
 .owner-info {
   display: flex;
   align-items: center;
@@ -136,7 +130,6 @@
   font-size: 16px;
 }
 
-/* ===== Bouton Acheter ===== */
 .buy-button {
   background: #2cb1ba;
   color: white;
@@ -156,7 +149,6 @@
   box-shadow: 0 4px 12px rgba(44, 177, 186, 0.3);
 }
 
-/* ===== Loading et Error ===== */
 .loading,
 .error {
   text-align: center;
@@ -170,7 +162,6 @@
   margin: 0;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .offer-container {
     flex-direction: column;

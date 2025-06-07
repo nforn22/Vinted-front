@@ -1,0 +1,19 @@
+.publish-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(44,177,186,0.08);
+  text-align: center;
+}
+
+.publish-container h1 {
+  color: #2cb1ba;
+  margin-bottom: 16px;
+}
+
+.publish-container p {
+  color: #333;
+  font-size: 18px;
+} 

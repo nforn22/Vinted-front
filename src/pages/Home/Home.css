@@ -2,7 +2,6 @@
   width: 100%;
 }
 
-/* ===== Hero ===== */
 .hero {
   position: relative;
   height: 455px;
@@ -68,14 +67,12 @@
   background: #259ba3;
 }
 
-/* ===== Loading ===== */
 .loading {
   text-align: center;
   padding: 40px 0;
   color: #666;
 }
 
-/* ===== Offers ===== */
 .offers-container {
   max-width: 1200px;
   margin: 40px auto;

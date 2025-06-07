@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Home.css';
 import homeImg from '../../assets/home-img.jpg';
 import OfferGrid from '../../components/OfferGrid/OfferGrid';
+import { Link } from 'react-router-dom';
 
 export const API_URL = "https://site--backend-vinted--t29qzrn4njwx.code.run";
 
@@ -33,7 +34,7 @@ function Home() {
         <div className="hero-content">
           <div className="hero-text-box">
             <h1>Prêts à faire du tri dans vos placards ?</h1>
-            <button className="hero-button">Commencer à vendre</button>
+            <Link to="/publish" className="hero-button">Commencer à vendre</Link>
           </div>
         </div>
       </div>

@@ -47,7 +47,6 @@
   animation: slideUp 0.3s ease-out;
 }
 
-/* ===== Bouton de fermeture ===== */
 .modal-close {
   position: absolute;
   top: 20px;
@@ -73,7 +72,6 @@
   transform: scale(1.1);
 }
 
-/* ===== Titre de la modal ===== */
 .modal-title {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 600;
@@ -86,7 +84,6 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-/* ===== Formulaire ===== */
 .signup-form {
   padding: 32px 40px 40px 40px;
   display: flex;
@@ -94,7 +91,6 @@
   gap: 20px;
 }
 
-/* ===== Inputs ===== */
 .signup-form input[type="text"],
 .signup-form input[type="email"],
 .signup-form input[type="password"] {
@@ -145,7 +141,6 @@
   75% { transform: translateX(4px); }
 }
 
-/* ===== Messages d'erreur ===== */
 .error-message {
   color: #ff4757;
   font-size: 14px;
@@ -195,7 +190,6 @@
   margin-top: 1px;
 }
 
-/* ===== Texte d'information ===== */
 .signup-info-text {
   font-size: 12px;
   color: #888;
@@ -204,7 +198,6 @@
   margin-top: 8px;
 }
 
-/* ===== Bouton d'inscription ===== */
 .signup-btn {
   background: linear-gradient(135deg, #09b3af 0%, #078a87 100%);
   color: white;
@@ -237,7 +230,6 @@
   box-shadow: 0 4px 12px rgba(9, 179, 175, 0.2);
 }
 
-/* ===== Message de succès ===== */
 .success-message {
   background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
   color: white;
@@ -256,7 +248,6 @@
   }
 }
 
-/* ===== Section de changement (connexion) ===== */
 .signup-or-email {
   padding: 20px 40px 0 40px;
   text-align: center;
@@ -371,7 +362,6 @@
   color: #09b3af;
 }
 
-/* ===== Boutons sociaux ===== */
 .social-buttons {
   padding: 0 20px;
   display: flex;
@@ -410,7 +400,6 @@
   color: #1877f2;
 }
 
-/* ===== Section "Ou inscris-toi avec" ===== */
 .signup-email-link {
   color: #09b3af;
   font-weight: 600;

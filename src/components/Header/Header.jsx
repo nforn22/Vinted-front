@@ -43,7 +43,7 @@ function Header({ userToken, setUserToken }) {
               Se déconnecter
             </button>
           )}
-          <button className="btn-primary">Vends tes articles</button>
+          <Link to="/publish" className="btn-primary">Vends tes articles</Link>
         </div>
       </div>
       {isSignupOpen && (
