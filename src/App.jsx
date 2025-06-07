@@ -7,6 +7,8 @@ import Offer from './pages/Offer/Offer';
 import SignupModal from './components/SignupModal/SignupModal';
 import Publish from './pages/Publish/Publish';
 import Member from './pages/Member/Member';
+import Payment from './pages/Payment/Payment';
+
 import './App.css';
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
         <Route path="/publish" element={userToken ? <Publish /> : <Navigate to="/" />} />
         <Route path="/member" element={userToken ? <Member /> : <Navigate to="/" />} />
         <Route path="/signup" element={<SignupModal />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
   );
