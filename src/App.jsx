@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Offer from './pages/Offer/Offer';
 import SignupModal from './components/SignupModal/SignupModal';
 import Publish from './pages/Publish/Publish';
+import Member from './pages/Member/Member';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/publish" element={userToken ? <Publish /> : <Navigate to="/" />} />
+        <Route path="/member" element={userToken ? <Member /> : <Navigate to="/" />} />
         <Route path="/signup" element={<SignupModal />} />
       </Routes>
     </Router>

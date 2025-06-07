@@ -61,6 +61,7 @@
   cursor: pointer;
   transition: all 0.2s;
   border-radius: 10px;
+  text-decoration: none;
 }
 
 .hero-button:hover {
