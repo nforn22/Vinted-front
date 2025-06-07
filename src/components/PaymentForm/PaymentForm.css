@@ -1,0 +1,178 @@
+.payment-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.payment-form {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(44, 177, 186, 0.08);
+}
+
+.payment-form h2 {
+    color: #2cb1ba;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.stripe-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    color: #666;
+}
+
+.stripe-loading p {
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.card-details {
+    margin: 24px 0;
+}
+
+.card-element-container {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.card-element-container:focus-within {
+    border-color: #2cb1ba;
+    box-shadow: 0 0 0 1px #2cb1ba;
+}
+
+.card-help {
+    margin-top: 12px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #666;
+}
+
+.card-help p {
+    margin: 4px 0;
+}
+
+.card-help p:first-child {
+    margin-top: 0;
+}
+
+.card-help p:last-child {
+    margin-bottom: 0;
+}
+
+/* éléments Stripe */
+.StripeElement {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.StripeElement--focus {
+    border-color: #2cb1ba;
+    box-shadow: 0 0 0 1px #2cb1ba;
+}
+
+.StripeElement--invalid {
+    border-color: #9e2146;
+}
+
+/* autofill de Stripe Link */
+.StripeElement--autofill {
+    background-color: #f8f9fa;
+}
+
+.error-message {
+    background-color: #fff2f2;
+    border: 1px solid #ffcdd2;
+    color: #d32f2f;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+.card-error {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.error-message::before {
+    content: "⚠️";
+}
+
+.payment-button {
+    width: 100%;
+    background: #2cb1ba;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 24px;
+}
+
+.payment-button:hover:not(:disabled) {
+    background: #259ba3;
+    transform: translateY(-1px);
+}
+
+.payment-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.payment-button.loading {
+    position: relative;
+    color: transparent;
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
