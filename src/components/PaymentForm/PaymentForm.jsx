@@ -11,6 +11,9 @@ function PaymentForm() {
     const [cardComplete, setCardComplete] = useState(false);
     const [cardError, setCardError] = useState(null);
     const formRef = useRef(null);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [pendingSubmit, setPendingSubmit] = useState(null);
+    const [showSuccess, setShowSuccess] = useState(false);
     
     // vérifier si Stripe est prêt
     useEffect(() => {
@@ -39,25 +42,32 @@ function PaymentForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setError(null);
+        // On affiche la confirmation avant de lancer le paiement
+        setPendingSubmit(() => () => doPayment());
+        setShowConfirm(true);
+    };
+
+    // Fonction qui lance le paiement réel
+    const doPayment = async () => {
         setIsLoading(true);
         setError(null);
-
+        setShowConfirm(false);
         try {
             if (!stripe || !elements) {
                 throw new Error("Le système de paiement n'est pas encore prêt");
             }
-
             if (!cardComplete) {
                 throw new Error("Veuillez remplir correctement les informations de votre carte");
             }
-
             // TODO: implémenter la logique de paiement ici
             await new Promise(resolve => setTimeout(resolve, 2000)); // simulation d'un appel API
-            alert("paiement non implémenté (test)");
+            setShowSuccess(true);
+            // Optionnel : masquer le message après 2s
+            setTimeout(() => setShowSuccess(false), 2000);
         } catch (error) {
             console.error("Erreur lors du paiement:", error);
             setError(error.message || "Une erreur est survenue lors du paiement");
-            // focus sur le premier champ en cas d'error
             if (formRef.current) {
                 const firstInput = formRef.current.querySelector('input');
                 if (firstInput) firstInput.focus();
@@ -69,7 +79,6 @@ function PaymentForm() {
 
     return (
         <div className="payment-form-container" role="dialog" aria-modal="true">
-            {/* résumé de la commande */}
             <div className="order-summary">
                 <h3>Résumé de la commande</h3>
                 <div className="order-summary-content">
@@ -81,7 +90,26 @@ function PaymentForm() {
                     </div>
                 </div>
             </div>
-            {/* form de paiement */}
+            {/* Message de succès */}
+            {showSuccess && (
+                <div className="payment-success-message" role="alert">
+                    <span className="success-icon">✅</span>
+                    Paiement réussi ! Merci pour ton achat.
+                </div>
+            )}
+            {/* Modale de confirmation */}
+            {showConfirm && (
+                <div className="confirm-modal-overlay" tabIndex={-1}>
+                    <div className="confirm-modal" role="dialog" aria-modal="true">
+                        <div className="confirm-title">Confirmer le paiement</div>
+                        <div className="confirm-text">Es-tu sûr de vouloir payer <strong>12,00&nbsp;€</strong> pour cet article&nbsp;?</div>
+                        <div className="confirm-actions">
+                            <button type="button" className="btn-cancel" onClick={() => setShowConfirm(false)}>Annuler</button>
+                            <button type="button" className="btn-confirm" onClick={() => { setShowConfirm(false); if (pendingSubmit) pendingSubmit(); }}>Confirmer</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <form 
                 ref={formRef}
                 onSubmit={handleSubmit} 
