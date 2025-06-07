@@ -195,3 +195,49 @@
         transform: translateY(0);
     }
 }
+
+/* résumé de la commande (simulé) ======================= */
+.order-summary {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(44, 177, 186, 0.06);
+}
+.order-summary h3 {
+    margin: 0 0 12px 0;
+    color: #2cb1ba;
+    font-size: 18px;
+    font-weight: 600;
+}
+.order-summary-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.order-summary-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+}
+.order-summary-details {
+    flex: 1;
+}
+.order-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.order-desc {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 6px;
+}
+.order-price {
+    font-size: 15px;
+    color: #222;
+    font-weight: 600;
+}

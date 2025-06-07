@@ -69,6 +69,19 @@ function PaymentForm() {
 
     return (
         <div className="payment-form-container" role="dialog" aria-modal="true">
+            {/* résumé de la commande */}
+            <div className="order-summary">
+                <h3>Résumé de la commande</h3>
+                <div className="order-summary-content">
+                    <img src="https://via.placeholder.com/80x80.png?text=Article" alt="Produit" className="order-summary-img" />
+                    <div className="order-summary-details">
+                        <div className="order-title">T-shirt oversize blanc</div>
+                        <div className="order-desc">Taille M - Marque Zara</div>
+                        <div className="order-price">Prix : <strong>12,00 €</strong></div>
+                    </div>
+                </div>
+            </div>
+            {/* form de paiement */}
             <form 
                 ref={formRef}
                 onSubmit={handleSubmit} 
