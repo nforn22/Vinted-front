@@ -1,27 +1,47 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Offer.css';
 
-export const API_URL = "https://site--backend-vinted--t29qzrn4njwx.code.run";
+const API_URL = import.meta.env.VITE_API_URL || "https://site--backend-vinted--t29qzrn4njwx.code.run";
 
 function Offer() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [offer, setOffer] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { id } = useParams();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchOffer = async () => {
       try {
         const response = await axios.get(`${API_URL}/offers/${id}`);
         setOffer(response.data);
-        setIsLoading(false);
-      } catch {
+      } catch (error) {
+        console.error("Erreur lors de la récupération de l'offre:", error);
+      } finally {
         setIsLoading(false);
       }
     };
-    fetchData();
+    fetchOffer();
   }, [id]);
+
+  const handleBuy = () => {
+    if (!offer) return;
+    
+    navigate("/payment", {
+      state: {
+        title: offer.product_name,
+        price: offer.product_price,
+        id: offer._id,
+        image: offer.product_image?.secure_url,
+        brand: offer.product_details.find(detail => detail.MARQUE)?.MARQUE,
+        size: offer.product_details.find(detail => detail.TAILLE)?.TAILLE,
+        condition: offer.product_details.find(detail => detail.ETAT)?.ETAT,
+        color: offer.product_details.find(detail => detail.COULEUR)?.COULEUR,
+        city: offer.product_details.find(detail => detail.EMPLACEMENT)?.EMPLACEMENT,
+      }
+    });
+  };
 
   if (isLoading) {
     return <div className="loading"><p>Chargement en cours...</p></div>;
@@ -72,7 +92,7 @@ function Offer() {
             )}
             <span className="owner-name">{offer.owner.account.username}</span>
           </div>
-          <button className="buy-button">Acheter</button>
+          <button className="buy-button" onClick={handleBuy}>Acheter</button>
         </div>
       </div>
     </div>

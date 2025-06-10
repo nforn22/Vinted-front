@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import axios from "axios";
+import Cookies from "js-cookie";
 import "./PaymentForm.css";
 
-function PaymentForm() {
+const API_URL = import.meta.env.VITE_API_URL || "https://site--backend-vinted--t29qzrn4njwx.code.run";
+
+function PaymentForm({ title, price, id, image, brand, size, /*condition, color, city */ }) {
     const stripe = useStripe();
     const elements = useElements();
     const [isLoading, setIsLoading] = useState(false);
@@ -60,11 +64,39 @@ function PaymentForm() {
             if (!cardComplete) {
                 throw new Error("Veuillez remplir correctement les informations de votre carte");
             }
-            // TODO: implémenter la logique de paiement ici
-            await new Promise(resolve => setTimeout(resolve, 2000)); // simulation d'un appel API
-            setShowSuccess(true);
-            // Optionnel : masquer le message après 2s
-            setTimeout(() => setShowSuccess(false), 2000);
+
+            const token = Cookies.get("token");
+            const response = await axios.post(
+                `${API_URL}/payment/create-payment-intent`,
+                {
+                    title,
+                    price,
+                    offerId: id,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
+                response.data.clientSecret,
+                {
+                    payment_method: {
+                        card: elements.getElement(CardElement),
+                    },
+                }
+            );
+
+            if (stripeError) {
+                throw new Error(stripeError.message);
+            }
+
+            if (paymentIntent.status === "succeeded") {
+                setShowSuccess(true);
+                setTimeout(() => setShowSuccess(false), 2000);
+            }
         } catch (error) {
             console.error("Erreur lors du paiement:", error);
             setError(error.message || "Une erreur est survenue lors du paiement");
@@ -82,27 +114,30 @@ function PaymentForm() {
             <div className="order-summary">
                 <h3>Résumé de la commande</h3>
                 <div className="order-summary-content">
-                    <img src="https://via.placeholder.com/80x80.png?text=Article" alt="Produit" className="order-summary-img" />
+                    <img src={image} alt={title} className="order-summary-img" />
                     <div className="order-summary-details">
-                        <div className="order-title">T-shirt oversize blanc</div>
-                        <div className="order-desc">Taille M - Marque Zara</div>
-                        <div className="order-price">Prix : <strong>12,00 €</strong></div>
+                        <div className="order-title">{title}</div>
+                        <div className="order-desc">
+                            {size && `Taille ${size}`}
+                            {brand && ` - Marque ${brand}`}
+                        </div>
+                        <div className="order-price">Prix : <strong>{price.toFixed(2)} €</strong></div>
                     </div>
                 </div>
             </div>
-            {/* Message de succès */}
+
             {showSuccess && (
                 <div className="payment-success-message" role="alert">
                     <span className="success-icon">✅</span>
                     Paiement réussi ! Merci pour ton achat.
                 </div>
             )}
-            {/* Modale de confirmation */}
+
             {showConfirm && (
                 <div className="confirm-modal-overlay" tabIndex={-1}>
                     <div className="confirm-modal" role="dialog" aria-modal="true">
                         <div className="confirm-title">Confirmer le paiement</div>
-                        <div className="confirm-text">Es-tu sûr de vouloir payer <strong>12,00&nbsp;€</strong> pour cet article&nbsp;?</div>
+                        <div className="confirm-text">Es-tu sûr de vouloir payer <strong>{price.toFixed(2)}&nbsp;€</strong> pour cet article&nbsp;?</div>
                         <div className="confirm-actions">
                             <button type="button" className="btn-cancel" onClick={() => setShowConfirm(false)}>Annuler</button>
                             <button type="button" className="btn-confirm" onClick={() => { setShowConfirm(false); if (pendingSubmit) pendingSubmit(); }}>Confirmer</button>
