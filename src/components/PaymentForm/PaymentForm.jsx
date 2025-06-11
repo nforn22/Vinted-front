@@ -47,12 +47,12 @@ function PaymentForm({ title, price, id, image, brand, size, /*condition, color,
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError(null);
-        // On affiche la confirmation avant de lancer le paiement
+        // afficher la confirmation avant de lancer le paiement
         setPendingSubmit(() => () => doPayment());
         setShowConfirm(true);
     };
 
-    // Fonction qui lance le paiement réel
+    // lance le paiement réel
     const doPayment = async () => {
         setIsLoading(true);
         setError(null);
