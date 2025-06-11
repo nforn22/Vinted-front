@@ -13,6 +13,7 @@ function Publish() {
   const [price, setPrice] = useState("");
   const [exchange, setExchange] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [file, setFile] = useState(null);
 
     // gestion de la soumission du formulaire (connexion au back à l'étape 2)
     const handleSubmit = (event) => {
@@ -30,13 +31,37 @@ function Publish() {
         city,
         price,
         exchange,
+        file,
       });
       setIsLoading(false);
     };
 
+  // gestion de la sélection de fichier
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
   return (
     <div className="publish-container">
       <h1>Vends ton article</h1>
+      {/* upload image */}
+      <div className="photo-placeholder">
+        <label htmlFor="file-upload" className="photo-upload-label">
+          <input
+            id="file-upload"
+            type="file"
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+            accept="image/*"
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <span className="photo-upload-btn">+</span>
+            <span className="photo-upload-text">
+              {file ? file.name : 'Ajoute une photo'}
+            </span>
+          </div>
+        </label>
+      </div>
       {isLoading ? (
         <div style={{ display: "flex", justifyContent: "center", margin: "40px 0" }}>
           <Circles
@@ -123,15 +148,13 @@ function Publish() {
               onChange={(event) => setPrice(event.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                checked={exchange}
-                onChange={(event) => setExchange(event.target.checked)}
-              />
-              Je suis intéressé(e) par les échanges
-            </label>
+          <div className="checkbox-group">
+            <input
+              type="checkbox"
+              checked={exchange}
+              onChange={(event) => setExchange(event.target.checked)}
+            />
+            <label>Je suis intéressé(e) par les échanges</label>
           </div>
           <button type="submit" disabled={isLoading}>Ajouter</button>
         </form>
