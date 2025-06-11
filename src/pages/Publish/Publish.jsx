@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDropzone } from 'react-dropzone';
 import { Circles } from 'react-loader-spinner';
 import './Publish.css';
 
@@ -15,52 +16,55 @@ function Publish() {
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState(null);
 
-    // gestion de la soumission du formulaire (connexion au back à l'étape 2)
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      setIsLoading(true);
-      // back connecté ici  ==> TODO
-      // pour l'instant console.log
-      console.log({
-        title,
-        description,
-        brand,
-        size,
-        color,
-        condition,
-        city,
-        price,
-        exchange,
-        file,
-      });
-      setIsLoading(false);
-    };
+  // dropzone
+  const onDrop = (acceptedFiles) => {
+    setFile(acceptedFiles[0]);
+  };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { 'image/*': [] },
+    multiple: false,
+  });
 
-  // gestion de la sélection de fichier
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  // gestion de la soumission du formulaire (connexion au back à l'étape 2)
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    // back connecté ici  ==> TODO
+    // pour l'instant console.log
+    console.log({
+      title,
+      description,
+      brand,
+      size,
+      color,
+      condition,
+      city,
+      price,
+      exchange,
+      file,
+    });
+    setIsLoading(false);
   };
 
   return (
     <div className="publish-container">
       <h1>Vends ton article</h1>
-      {/* upload image */}
-      <div className="photo-placeholder">
-        <label htmlFor="file-upload" className="photo-upload-label">
-          <input
-            id="file-upload"
-            type="file"
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
-            accept="image/*"
-          />
+      {/* upload image avec react-dropzone */}
+      <div className="photo-placeholder" {...getRootProps()}>
+        <input {...getInputProps()} />
+        <div className="photo-upload-label">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <span className="photo-upload-btn">+</span>
             <span className="photo-upload-text">
-              {file ? file.name : 'Ajoute une photo'}
+              {file
+                ? file.name
+                : isDragActive
+                  ? "Déposez l'image ici..."
+                  : "Ajoute une photo"}
             </span>
           </div>
-        </label>
+        </div>
       </div>
       {isLoading ? (
         <div style={{ display: "flex", justifyContent: "center", margin: "40px 0" }}>
